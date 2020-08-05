@@ -1,6 +1,6 @@
 {
-    "name": "api-gw",
-    "version": "1.0.148",
+    "name": "mc-gateway",
+    "version": "0.0.1",
     "private": true,
     "description": "New Swagger API Project",
     "keywords": [],
@@ -27,7 +27,6 @@
         "swagger-express-mw": "^0.7.0",
         "swagger-tools": "^0.10.1",
         "sync-request": "^6.0.0",
-        "winston": "^2.1.1",
         "yamljs": "^0.3.0"
     },
     "devDependencies": {
