@@ -1,0 +1,16 @@
+swagger: "2.0"
+info:
+  description: "Map Colonies Applications API Gateway service, used as entry point to map colonies backend services"
+  version: "1.0.1"
+  title: Map Colonies API Gateway
+host: localhost:10010
+basePath: /api/v1
+x-config-validation-key: "{{ getv "/configuration/global/configvalidationkey" }}"
+schemes:
+  - http
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths: {}

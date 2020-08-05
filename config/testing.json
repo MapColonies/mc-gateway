@@ -1,0 +1,37 @@
+{
+    "swagger": {
+        "swDomain": "localhost",
+        "swPort": "8081"
+    },
+    "proxy": {
+        "port": "3006",
+        "domain": "localhost",
+        "dnsHost": "localhost",
+        "basePathStartIndexInUrl": 1,
+        "routingTableTTL": 300000
+    },
+    "swaggerApi": {
+        "endPoint": "http://localhost:8081"
+    },
+    "log": {
+        "level": "debug",
+        "log2file": "false"
+    },
+    "server": {
+        "port": "8081"
+    },
+    "useDns": false,
+    "servicesList": [
+        "overlays"
+    ],
+    "authenticatedServices": {
+        "servicesList": [
+            "overlays",
+            "frames"
+        ],
+        "active": "true"
+    },
+    "hostOfServicesInside": "",
+    "hostOfServicesOutside": "",
+    "dynamicSwaggerDelayInSec": 30
+}

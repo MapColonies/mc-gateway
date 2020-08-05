@@ -1,0 +1,35 @@
+{
+    \"proxy\": {
+		\"port\" : \"{{ getv \"/configuration/$SERVICE_NAME/proxy/port\" \"80\" }}\",
+        \"domain\" : \"{{ getv \"/configuration/global/domain\" \"\"}}\",
+        \"dnsHost\" : \"{{ getv \"/configuration/global/dnshost\" \"sky-dns\"}}\",
+        \"basePathStartIndexInUrl\" : \"{{ getv \"/configuration/$SERVICE_NAME/basepath/startindexinurl\" \"1\" }}\",
+        \"routingTableTTL\" : \"{{ getv \"/configuration/$SERVICE_NAME/routingtable/ttl\" \"300000\" }}\"
+    },
+    \"swagger\": {
+		\"swDomain\": \"{{ or (getv \"/configuration/$SERVICE_NAME/swagger/default/host\" \"\") (printf \"app.%s:80/api-gw\" (getv \"/configuration/global/domain\")) }}\",
+		\"swPort\": \"{{ getv \"/configuration/$SERVICE_NAME/swagger/port\" \"81\" }}\",
+		\"namespace\": \"{{ getv \"/configuration/$SERVICE_NAME/swagger/namespace\" \"\" }}\",
+        \"serviceInst\": \"{{ getv \"/configuration/$SERVICE_NAME/swagger/instance\" \"\"}}\"
+    },
+    \"swaggerApi\": {
+        \"endPoint\" : \"{{ or (getv \"/configuration/swaggerapi/swagger/host\" \"\") (printf \"http://app.%s:80/swagger-api-server\" (getv \"/configuration/global/domain\")) }}\"
+    },
+	\"log\": {
+        \"level\" : \"{{ getv \"/configuration/$SERVICE_NAME/log/level\" \"info\" }}\",
+        \"log2file\" : \"{{ getv \"/configuration/$SERVICE_NAME/log/log2file\" \"false\" }}\"
+    },
+    \"server\": {
+        \"port\" : \"{{ getv \"/configuration/$SERVICE_NAME/srv/port\" \"80\" }}\"
+    },
+    \"useDns\" : \"{{ getv \"/configuration/$SERVICE_NAME/use/dns\" \"false\" }}\",
+    \"servicesList\" : {{ getv \"/configuration/$SERVICE_NAME/serviceslist\" }},
+    \"authenticatedServices\" : {
+        \"active\" : \"{{ getv \"/configuration/$SERVICE_NAME/authenticatedservices/active\" \"true\"}}\",
+        \"servicesList\" : {{ getv \"/configuration/$SERVICE_NAME/authenticatedservices/serviceslist\" }}
+    },
+    \"hostOfServicesInside\": \"{{ getv \"/configuration/swaggerapi/swagger/host\" \"http://swagger-api-server:80\" }}\",
+    \"hostOfServicesOutside\": \"{{ or (getv \"/configuration/swaggerapi/swagger/host\" \"\") (printf \"http://app.%s:80/swagger-api-server\" (getv \"/configuration/global/domain\")) }}\",
+    \"dynamicSwaggerDelayInSec\": {{ getv \"/configuration/$SERVICE_NAME/dynamicswaggerdelayinsec\" \"60\"}},
+    \"configValidationKey\": \"{{ getv \"/configuration/global/configvalidationkey\" }}\"
+}
