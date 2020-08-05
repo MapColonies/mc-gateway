@@ -1,0 +1,24 @@
+[template]
+src = \"production.tmpl\"
+dest = \"/service/config/production.json\"
+keys = [
+    \"/configuration/$SERVICE_NAME/proxy/port\",
+    \"/configuration/global/domain\",
+    \"/configuration/global/dnshost\",
+    \"/configuration/$SERVICE_NAME/basepath/startindexinurl\",
+    \"/configuration/$SERVICE_NAME/routingtable/ttl\",
+    \"/configuration/$SERVICE_NAME/log/level\",
+    \"/configuration/$SERVICE_NAME/log/log2file\",
+    \"/configuration/$SERVICE_NAME/swagger/default/host\",
+    \"/configuration/$SERVICE_NAME/swagger/port\",
+    \"/configuration/$SERVICE_NAME/swagger/namespace\",
+    \"/configuration/$SERVICE_NAME/srv/port\",
+    \"/configuration/$SERVICE_NAME/use/dns\",
+    \"/configuration/swaggerapi/swagger/host\",
+    \"/configuration/$SERVICE_NAME/serviceslist\",
+    \"/configuration/$SERVICE_NAME/authenticatedservices/serviceslist\",
+    \"/configuration/$SERVICE_NAME/authenticatedservices/active\",
+    \"/configuration/global/configvalidationkey\",
+    \"/configuration/$SERVICE_NAME/dynamicswaggerdelayinsec\",
+    \"/configuration/$SERVICE_NAME/swagger/instance\"
+]

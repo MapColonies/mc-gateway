@@ -1,0 +1,6 @@
+[template]
+src = "swagger.tmpl"
+dest = "/service/api/swagger/swagger.yaml"
+keys = [
+    "/configuration/global/configvalidationkey"
+]

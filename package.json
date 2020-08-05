@@ -1,0 +1,45 @@
+{
+    "name": "mc-gateway",
+    "version": "0.0.1",
+    "private": true,
+    "description": "New Swagger API Project",
+    "keywords": [],
+    "author": "",
+    "license": "",
+    "main": "app.js",
+    "dependencies": {
+        "@map-colonies/mc-logger": "^1.1.0",
+        "@map-colonies/mc-probe": "^1.0.0",
+        "bluebird": "^3.4.1",
+        "config": "^1.19.0",
+        "connect": "^3.2.0",
+        "dns-packet": "^1.1.0",
+        "dns-socket": "^1.4.2",
+        "express": "^4.12.3",
+        "http-proxy": "^1.16.2",
+        "js-yaml": "^3.11.0",
+        "json2yaml": "^1.1.0",
+        "kontainer-di": "^0.9.9",
+        "lodash": "^4.6.1",
+        "memory-cache": "^0.1.6",
+        "morgan": "^1.6.1",
+        "request": "^2.72.0",
+        "swagger-express-mw": "^0.7.0",
+        "swagger-tools": "^0.10.1",
+        "sync-request": "^6.0.0",
+        "yamljs": "^0.3.0"
+    },
+    "devDependencies": {
+        "chai": "^3.5.0",
+        "chai-as-promised": "^5.2.0",
+        "mocha": "^8.1.1",
+        "should": "^8.2.2",
+        "sinon": "^1.17.4",
+        "xunit-file": "^1.0.0"
+    },
+    "scripts": {
+        "start": "NODE_ENV=production node --inspect --nolazy app.js",
+        "test": "./node_modules/.bin/mocha --reporter spec ./tests/*.js",
+        "testx": "./node_modules/.bin/mocha --reporter xunit-file ./tests/*.js"
+    }
+}
