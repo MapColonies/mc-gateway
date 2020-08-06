@@ -5,7 +5,6 @@ const json2Yaml = require('json2yaml');
 const fs = require('fs');
 const syncRequest = require('sync-request');
 const jsyaml = require('js-yaml');
-const _ = require('lodash');
 
 module.exports.DynamicSwaggerCreator = class DynamicSwaggerCreator {
   constructor(logger, servicesList, routingDiscover) {
@@ -36,9 +35,9 @@ module.exports.DynamicSwaggerCreator = class DynamicSwaggerCreator {
       combinedJsonYaml = jsyaml.safeLoad(spec);
       originalYaml = json2Yaml.stringify(combinedJsonYaml);
       const serviceHandlers = [];
-      _.forEach(this._servicesList, service => {
+      this._servicesList.forEach(service => {
         if (!this._successServices.has(service)) {
-          serviceHandlers.push(this.retriveServiceYaml(combinedJsonYaml, service));
+          serviceHandlers.push(this.retrieveServiceYaml(combinedJsonYaml, service));
         }
       });
 
@@ -64,7 +63,7 @@ module.exports.DynamicSwaggerCreator = class DynamicSwaggerCreator {
     return isError;
   }
 
-  retriveServiceYaml(combinedJsonYaml, service) {
+  retrieveServiceYaml(combinedJsonYaml, service) {
     return this._routingDiscover.getServiceURL(service).then(url => {
       const serviceRequest = syncRequest('GET', url + '/api-docs');
       if (serviceRequest.statusCode === 200) {

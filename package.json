@@ -27,7 +27,6 @@
     "js-yaml": "^3.11.0",
     "json2yaml": "^1.1.0",
     "kontainer-di": "^0.9.9",
-    "lodash": "^4.6.1",
     "memory-cache": "^0.1.6",
     "swagger-express-mw": "^0.7.0",
     "swagger-tools": "^0.10.1",
