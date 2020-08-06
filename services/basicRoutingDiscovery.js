@@ -1,8 +1,8 @@
 'use strict';
-var config = require('config');
-var proxyConfig = config.get('proxy');
-var routingTable = require('memory-cache');
-var IRoutingDiscovery = require('./iRoutingDiscovery').IRoutingDiscovery;
+const config = require('config');
+const proxyConfig = config.get('proxy');
+const routingTable = require('memory-cache');
+const IRoutingDiscovery = require('./iRoutingDiscovery').IRoutingDiscovery;
 
 module.exports.BasicRoutingDiscovery = class BasicRoutingDiscovery extends IRoutingDiscovery {
   constructor(logger) {

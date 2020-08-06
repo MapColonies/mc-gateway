@@ -8,6 +8,8 @@ build/Release
 #IDE
 .vscode
 .idea
+#keep vscode launch configurations for debugging
+!.vscode/launch.json
 
 # This .gitignore is taken from
 # https://github.com/github/gitignore/blob/master/Node.gitignore
