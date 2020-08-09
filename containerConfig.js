@@ -1,15 +1,19 @@
 // containerConfig.js
 const config = require('config');
-const logger = require('./loggerConfig');
 const container = require('kontainer-di');
-const routingDiscover = JSON.parse(config.useDns)
-  ? require('./services/dnsRoutingDiscovery').DnsRoutingDiscovery
-  : require('./services/basicRoutingDiscovery').BasicRoutingDiscovery;
+const logger = require('./loggerConfig');
 const dynamicSwaggerCreator = require('./services/dynamicSwaggerCreator').DynamicSwaggerCreator;
 const userAuthenticator = require('./services/userAuthenticator');
 const helper = require('./services/helper');
+const probe = require('@map-colonies/mc-probe').Probe;
+const swaggerHandler = require('./requestHandlers/swaggerHandler').SwaggerHandler;
+const proxyHandler = require('./requestHandlers/proxyHandler').ProxyHandler;
+
+const routingDiscover = JSON.parse(config.useDns)
+  ? require('./services/dnsRoutingDiscovery').DnsRoutingDiscovery
+  : require('./services/basicRoutingDiscovery').BasicRoutingDiscovery;
+
 const probeConfig = {};
-var probe = require('@map-colonies/mc-probe').Probe;
 const authenticatedServices = config.get('authenticatedServices');
 
 // register services in container
@@ -22,5 +26,7 @@ container.register('authenticatedServices', [], authenticatedServices);
 container.register('routingDiscover', ['logger'], routingDiscover);
 container.register('dynamicSwaggerCreator', ['logger', 'servicesConfig', 'routingDiscover'], dynamicSwaggerCreator);
 container.register('userAuthenticator', ['logger', 'authenticatedServices'], userAuthenticator);
+container.register('swaggerHandler', ['logger', 'dynamicSwaggerCreator', 'helper'], swaggerHandler);
+container.register('proxyHandler', ['logger', 'routingDiscover', 'userAuthenticator'], proxyHandler);
 
 module.exports = container;

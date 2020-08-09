@@ -26,7 +26,7 @@ describe('Basic Routing Discovery Tests', function () {
 
     return basicRoutingDiscovery.getRout(url)
       .then(result => {
-        expect(result).to.equal('http://localhost:' + config.get('swagger').swPort);
+        expect(result).to.equal('http://localhost:' + config.get('server').port);
       })
       .catch(err => {
         sinon.assert.fail('Test Failed with the following error: ' + err);

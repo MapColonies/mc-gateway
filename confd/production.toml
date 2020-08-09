@@ -2,7 +2,6 @@
 src = \"production.tmpl\"
 dest = \"/service/config/production.json\"
 keys = [
-    \"/configuration/$SERVICE_NAME/proxy/port\",
     \"/configuration/global/domain\",
     \"/configuration/global/dnshost\",
     \"/configuration/$SERVICE_NAME/basepath/startindexinurl\",
@@ -10,7 +9,6 @@ keys = [
     \"/configuration/$SERVICE_NAME/log/level\",
     \"/configuration/$SERVICE_NAME/log/log2file\",
     \"/configuration/$SERVICE_NAME/swagger/default/host\",
-    \"/configuration/$SERVICE_NAME/swagger/port\",
     \"/configuration/$SERVICE_NAME/swagger/namespace\",
     \"/configuration/$SERVICE_NAME/srv/port\",
     \"/configuration/$SERVICE_NAME/use/dns\",

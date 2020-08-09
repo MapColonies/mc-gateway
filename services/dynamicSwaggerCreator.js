@@ -1,7 +1,6 @@
 'use strict';
 
 const config = require('config');
-const json2Yaml = require('json2yaml');
 const fs = require('fs');
 const syncRequest = require('sync-request');
 const jsyaml = require('js-yaml');
@@ -14,7 +13,7 @@ module.exports.DynamicSwaggerCreator = class DynamicSwaggerCreator {
     this._hostOfServicesInside = config.get('hostOfServicesInside');
     this._hostOfServicesOutside = config.get('hostOfServicesOutside');
     this._successServices = new Map();
-    this.isFirst = true;
+    this._swaggerDoc = null;
   }
 
   getSuccessServicesSize() {
@@ -27,43 +26,32 @@ module.exports.DynamicSwaggerCreator = class DynamicSwaggerCreator {
   }
 
   async createDynamicSwagger() {
-    let combinedJsonYaml, originalYaml;
-    let isError = false;
+    let combinedJsonYaml;
     try {
       this._logger.log('debug', 'start creating dynamic swagger');
-      const spec = fs.readFileSync('./api/swagger/swagger.yaml', 'utf8');
-      combinedJsonYaml = jsyaml.safeLoad(spec);
-      originalYaml = json2Yaml.stringify(combinedJsonYaml);
+      if (!this._swaggerDoc){
+        const spec = fs.readFileSync('./api/swagger/swagger.yaml', 'utf8');
+        combinedJsonYaml = jsyaml.safeLoad(spec);
+      } else {
+        combinedJsonYaml = this._swaggerDoc;
+      }
       const serviceHandlers = [];
       this._servicesList.forEach(service => {
         if (!this._successServices.has(service)) {
-          serviceHandlers.push(this.retrieveServiceYaml(combinedJsonYaml, service));
+          serviceHandlers.push(this._retrieveServiceYaml(combinedJsonYaml, service));
         }
       });
 
       await Promise.all(serviceHandlers);
-      isError = false;
+      this._swaggerDoc = combinedJsonYaml;
+      return combinedJsonYaml;
     } catch (err) {
       this._logger.log('error', `Error: ${err.message || err}`);
-      isError = true;
-    } finally {
-      let yamlText = json2Yaml.stringify(combinedJsonYaml);
-      if (yamlText !== originalYaml) {
-        this._logger.log('debug', 'updating swagger.yaml');
-        // json2Yaml adds '---' at the beginning of the text and swagger don't validate this.
-        // thats why we remove the 3 first chars in the yamlText
-        if (this.isFirst) {
-          yamlText = yamlText.substring(3);
-          this.isFirst = false;
-        }
-
-        fs.writeFileSync('./api/swagger/swagger.yaml', yamlText);
-      }
+      return null;
     }
-    return isError;
   }
 
-  retrieveServiceYaml(combinedJsonYaml, service) {
+  _retrieveServiceYaml(combinedJsonYaml, service) {
     return this._routingDiscover.getServiceURL(service).then(url => {
       const serviceRequest = syncRequest('GET', url + '/api-docs');
       if (serviceRequest.statusCode === 200) {

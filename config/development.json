@@ -1,12 +1,10 @@
 {
     "swagger": {
         "swDomain": "localhost:3020",
-        "swPort": "3030",
         "namespace": "",
         "serviceInst":""
     },
     "proxy": {
-        "port": "80",
         "domain": "localhost",
         "dnsHost": "localhost",
         "basePathStartIndexInUrl": 1,
@@ -22,10 +20,9 @@
     "server": {
         "port": "8080"
     },
-    "useDns": "true",
+    "useDns": "false",
     "servicesList": [
-        "overlays",
-        "frames"
+        "overlays"
     ],
     "authenticatedServices": {
         "servicesList": [
