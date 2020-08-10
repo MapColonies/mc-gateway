@@ -19,7 +19,7 @@
     "server": {
         "port": "8081"
     },
-    "useDns": "false",
+    "useDns": "true",
     "servicesList": [
         "overlays"
     ],

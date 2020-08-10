@@ -20,7 +20,7 @@
     "server": {
         "port": "8080"
     },
-    "useDns": "false",
+    "useDns": "true",
     "servicesList": [
         "overlays"
     ],
