@@ -23,28 +23,22 @@ const errorOps = (msg, err) => {
 };
 
 // init must done without errors in order to be readiness
-(async () => {
-  let ready = false;
-  const setReady = () => {
-    if (ready) {
-      probe.readyFlag = true;
-    } else {
-      ready = true;
-    }
-  };
+async function main () {
   try {
-    swaggerHandler.init(app, setReady);
+    swaggerHandler.init(app);
     proxyHandler.init(app);
     const serverPort = config.get('server').port;
     try {
       await probe.start(app, serverPort);
       logger.log('info', 'service started at http://localhost:' + serverPort);
       logger.log('info', `swagger started at http://localhost:${serverPort}/${swaggerConfig.urlPath}`);
-      setReady();
+      probe.readyFlag = true;
     } catch (err) {
       errorOps(`Cannot start server ${err}`);
     }
   } catch (err) {
     errorOps('Error: ', err);
   }
-})();
+}
+
+main();

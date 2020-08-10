@@ -25,7 +25,9 @@ module.exports.ProxyHandler = class ProxyHandler {
       this._logger.log('debug', 'got request from host:' + (req.connection.remoteAddress || req.socket.remoteAddress));
       // TODO: add request filtering and replace authenticator
       if (req.method === 'OPTIONS' || this._userAuthenticator.checkUser(req)) {
+        // retrieve internal route from discovery service
         const rout = await this._routingDiscover.getRout(req.url);
+        // proxy pass the request to internal service
         this._proxy.web(req, res, { target: rout });
       } else {
         res.statusCode = 403;
