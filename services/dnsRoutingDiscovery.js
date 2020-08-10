@@ -13,7 +13,7 @@ module.exports.DnsRoutingDiscovery = class DnsRoutingDiscovery extends IRoutingD
     this.dnsSocket = dns();
 
     // rout for swagger urls
-    const rout = 'http://localhost:' + config.get('swagger').swPort;
+    const rout = 'http://localhost:' + config.get('server').port;
     routingTable.put('default', rout);
   }
 

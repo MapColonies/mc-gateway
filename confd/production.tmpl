@@ -1,6 +1,5 @@
 {
     \"proxy\": {
-		\"port\" : \"{{ getv \"/configuration/$SERVICE_NAME/proxy/port\" \"80\" }}\",
         \"domain\" : \"{{ getv \"/configuration/global/domain\" \"\"}}\",
         \"dnsHost\" : \"{{ getv \"/configuration/global/dnshost\" \"sky-dns\"}}\",
         \"basePathStartIndexInUrl\" : \"{{ getv \"/configuration/$SERVICE_NAME/basepath/startindexinurl\" \"1\" }}\",
@@ -8,9 +7,10 @@
     },
     \"swagger\": {
 		\"swDomain\": \"{{ or (getv \"/configuration/$SERVICE_NAME/swagger/default/host\" \"\") (printf \"app.%s:80/api-gw\" (getv \"/configuration/global/domain\")) }}\",
-		\"swPort\": \"{{ getv \"/configuration/$SERVICE_NAME/swagger/port\" \"81\" }}\",
 		\"namespace\": \"{{ getv \"/configuration/$SERVICE_NAME/swagger/namespace\" \"\" }}\",
-        \"serviceInst\": \"{{ getv \"/configuration/$SERVICE_NAME/swagger/instance\" \"\"}}\"
+        \"serviceInst\": \"{{ getv \"/configuration/$SERVICE_NAME/swagger/instance\" \"\"}}\",
+        \"urlPath\": \"{{ getv \"/configuration/$SERVICE_NAME/swagger/urlPath\" \"/api-docs\"}}\",
+        \"jsonPath\": \"{{ getv \"/configuration/$SERVICE_NAME/swagger/jsonPath\" \"/api-docs/json\"}}\"
     },
     \"swaggerApi\": {
         \"endPoint\" : \"{{ or (getv \"/configuration/swaggerapi/swagger/host\" \"\") (printf \"http://app.%s:80/swagger-api-server\" (getv \"/configuration/global/domain\")) }}\"

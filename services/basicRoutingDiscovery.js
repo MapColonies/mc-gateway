@@ -9,7 +9,7 @@ module.exports.BasicRoutingDiscovery = class BasicRoutingDiscovery extends IRout
     super(logger);
 
     // rout for swagger urls
-    const rout = 'http://localhost:' + config.get('swagger').swPort;
+    const rout = 'http://localhost:' + config.get('server').port;
     routingTable.put('default', rout);
   }
 

@@ -1,12 +1,12 @@
 {
     "swagger": {
         "swDomain": "localhost",
-        "swPort": "8081",
         "namespace": "",
-        "serviceInst":""
+        "serviceInst":"",
+        "urlPath":"/api-docs",
+        "jsonPath":"/api-docs/json"
     },
     "proxy": {
-        "port": "3006",
         "domain": "localhost",
         "dnsHost": "localhost",
         "basePathStartIndexInUrl": 1,
@@ -19,14 +19,13 @@
     "server": {
         "port": "8081"
     },
-    "useDns": "false",
+    "useDns": "true",
     "servicesList": [
         "overlays"
     ],
     "authenticatedServices": {
         "servicesList": [
-            "overlays",
-            "frames"
+            "overlays"
         ],
         "active": "true"
     },
