@@ -3,7 +3,8 @@
         "swDomain": "localhost",
         "namespace": "",
         "serviceInst":"",
-        "urlPath":"/api-docs"
+        "urlPath":"/api-docs",
+        "jsonPath":"/api-docs/json"
     },
     "proxy": {
         "domain": "localhost",

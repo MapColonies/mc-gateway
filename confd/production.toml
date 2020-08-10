@@ -18,5 +18,7 @@ keys = [
     \"/configuration/$SERVICE_NAME/authenticatedservices/active\",
     \"/configuration/global/configvalidationkey\",
     \"/configuration/$SERVICE_NAME/dynamicswaggerdelayinsec\",
-    \"/configuration/$SERVICE_NAME/swagger/instance\"
+    \"/configuration/$SERVICE_NAME/swagger/instance\",
+    \"/configuration/$SERVICE_NAME/swagger/urlPath\",
+    \"/configuration/$SERVICE_NAME/swagger/jsonPath\"
 ]

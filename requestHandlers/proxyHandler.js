@@ -19,6 +19,9 @@ module.exports.ProxyHandler = class ProxyHandler {
 
   async _proxyPass (req, res) {
     try {
+      if (req.baseUrl === '/favicon.ico'){
+        return res.sendStatus(404);
+      }
       this._logger.log('debug', 'got request from host:' + (req.connection.remoteAddress || req.socket.remoteAddress));
       // TODO: add request filtering and replace authenticator
       if (req.method === 'OPTIONS' || this._userAuthenticator.checkUser(req)) {

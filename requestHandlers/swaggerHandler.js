@@ -18,12 +18,19 @@ module.exports.SwaggerHandler = class SwaggerHandler {
       }
     });
     const swaggerPath = this._swaggerConfig.urlPath;
-    app.use(swaggerPath, (req, res, next) => {
+    let setSwagger = (req, res, next) => {
       req.swaggerDoc = this._swaggerDoc;
       req.swaggerDoc.host = this._swaggerConfig.swDomain + this._swaggerConfig.serviceInst + (this._swaggerConfig.namespace ? ('-' + this._swaggerConfig.namespace) : '');
-
       next();
-    }, swaggerUi.serve, swaggerUi.setup());
+    };
+    setSwagger = setSwagger.bind(this);
+    const swaggerJsonPath = this._swaggerConfig.jsonPath;
+    if (swaggerJsonPath && swaggerJsonPath !== ''){
+      app.get(swaggerJsonPath, setSwagger, (req, res) => {
+        res.json(req.swaggerDoc);
+      });
+    }
+    app.use(swaggerPath, setSwagger, swaggerUi.serve, swaggerUi.setup());
     this._logger.info(`added swagger at ${swaggerPath}`);
   }
 
