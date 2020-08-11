@@ -9,9 +9,26 @@ const probe = require('@map-colonies/mc-probe').Probe;
 const swaggerHandler = require('./requestHandlers/swaggerHandler').SwaggerHandler;
 const proxyHandler = require('./requestHandlers/proxyHandler').ProxyHandler;
 
-const routingDiscover = JSON.parse(config.useDns)
-  ? require('./services/dnsRoutingDiscovery').DnsRoutingDiscovery
-  : require('./services/basicRoutingDiscovery').BasicRoutingDiscovery;
+let routingDiscover;
+// TODO: add description to readme
+switch (config.discoveryService) {
+case 'dns':
+  routingDiscover = require('./services/dnsRoutingDiscovery').DnsRoutingDiscovery;
+  break;
+case 'basic':
+  routingDiscover = require('./services/basicRoutingDiscovery').BasicRoutingDiscovery;
+  break;
+case 'manual':
+case undefined:
+case null:
+case '':
+  routingDiscover = require('./services/manualRoutingDiscovery').ManualRoutingDiscovery;
+  break;
+default:
+  logger.error(`unsupported discovery service ${config.discoveryService}`);
+  process.exit(1);
+}
+logger.info(`using ${config.discoveryService} discovery service`);
 
 const probeConfig = {};
 const authenticatedServices = config.get('authenticatedServices');

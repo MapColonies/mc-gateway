@@ -22,7 +22,7 @@
     \"server\": {
         \"port\" : \"{{ getv \"/configuration/$SERVICE_NAME/srv/port\" \"80\" }}\"
     },
-    \"useDns\" : \"{{ getv \"/configuration/$SERVICE_NAME/use/dns\" \"false\" }}\",
+    \"discoveryService\" : \"{{ getv \"/configuration/$SERVICE_NAME/use/discoveryService\" \"manual\" }}\",
     \"servicesList\" : {{ getv \"/configuration/$SERVICE_NAME/serviceslist\" }},
     \"authenticatedServices\" : {
         \"active\" : \"{{ getv \"/configuration/$SERVICE_NAME/authenticatedservices/active\" \"true\"}}\",

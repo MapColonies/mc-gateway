@@ -19,17 +19,21 @@
     "server": {
         "port": "8081"
     },
-    "useDns": "true",
+    "discoveryService": "manual",
     "servicesList": [
-        "overlays"
+        "ingestion"
     ],
     "authenticatedServices": {
         "servicesList": [
-            "overlays"
         ],
         "active": "true"
     },
     "hostOfServicesInside": "",
     "hostOfServicesOutside": "",
-    "dynamicSwaggerDelayInSec": 30
+    "dynamicSwaggerDelayInSec": 30,
+    "manualDiscovery":{
+        "services":{
+            "ingestion": "http://localhost:3000"  
+        }
+    }
 }

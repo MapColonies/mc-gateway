@@ -1,10 +1,10 @@
 'use strict';
-var dns = require('dns-socket');
-var packet = require('dns-packet');
-var config = require('config');
-var proxyConfig = config.get('proxy');
-var routingTable = require('memory-cache');
-var IRoutingDiscovery = require('./iRoutingDiscovery').IRoutingDiscovery;
+const dns = require('dns-socket');
+const packet = require('dns-packet');
+const config = require('config');
+const proxyConfig = config.get('proxy');
+const routingTable = require('memory-cache');
+const IRoutingDiscovery = require('./iRoutingDiscovery').IRoutingDiscovery;
 const domain = config.get('proxy').domain;
 
 module.exports.DnsRoutingDiscovery = class DnsRoutingDiscovery extends IRoutingDiscovery {

@@ -45,24 +45,25 @@ module.exports.SwaggerHandler = class SwaggerHandler {
   }
 
   async _partialLoadSwagger() {
-    let successServicesSize, swaggerJson;
+    let successServicesSize;
     // keep trying to load new missing services until at least one loads successfully
     do {
       try {
         successServicesSize = this._dynamicSwaggerCreator.getSuccessServicesSize();
-        swaggerJson = null;
         // try loading missing services
-        swaggerJson = await this._dynamicSwaggerCreator.createDynamicSwagger();
-        // wait for a while before retrying if error occurred and no new services ware loaded
-        if (!swaggerJson && successServicesSize === this._dynamicSwaggerCreator.getSuccessServicesSize()) {
+        const swaggerJson = await this._dynamicSwaggerCreator.createDynamicSwagger();
+        // add newly loaded services to served swagger
+        if (swaggerJson){
+          this._swaggerDoc = swaggerJson;
+        }
+        // wait for a while before retrying if no new services ware loaded
+        if (successServicesSize === this._dynamicSwaggerCreator.getSuccessServicesSize()) {
           await this._helper.sleep(this._dynamicSwaggerDelayInSec * 1000);
         }
       } catch (e) {
         this._logger.log('error', `Error initSwagggerServer: ${e.message || e}`);
       }
     } while (successServicesSize === this._dynamicSwaggerCreator.getSuccessServicesSize());
-    // add newly loaded services to served swagger
-    this._swaggerDoc = swaggerJson;
     this._logger.log('info', 'Done partial init swaggger server');
     return Promise.resolve();
   }
