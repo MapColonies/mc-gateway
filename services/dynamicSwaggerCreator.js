@@ -32,6 +32,7 @@ module.exports.DynamicSwaggerCreator = class DynamicSwaggerCreator {
       if (!this._swaggerDoc){
         const spec = fs.readFileSync('./api/swagger/swagger.yaml', 'utf8');
         combinedJsonYaml = jsyaml.safeLoad(spec);
+        this._swaggerDoc = combinedJsonYaml;
       } else {
         combinedJsonYaml = this._swaggerDoc;
       }

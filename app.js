@@ -25,6 +25,7 @@ const errorOps = (msg, err) => {
 // init must done without errors in order to be readiness
 async function main () {
   try {
+    logger.info('starting gateway initialization');
     swaggerHandler.init(app);
     proxyHandler.init(app);
     const serverPort = config.get('server').port;
