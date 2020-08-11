@@ -20,14 +20,12 @@
     "server": {
         "port": "8080"
     },
-    "useDns": "true",
+    "discoveryService": "manual",
     "servicesList": [
-        "overlays"
+        "ingestion"
     ],
     "authenticatedServices": {
         "servicesList": [
-            "overlays",
-            "frames"
         ],
         "active": "true"
     },

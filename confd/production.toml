@@ -11,7 +11,6 @@ keys = [
     \"/configuration/$SERVICE_NAME/swagger/default/host\",
     \"/configuration/$SERVICE_NAME/swagger/namespace\",
     \"/configuration/$SERVICE_NAME/srv/port\",
-    \"/configuration/$SERVICE_NAME/use/dns\",
     \"/configuration/swaggerapi/swagger/host\",
     \"/configuration/$SERVICE_NAME/serviceslist\",
     \"/configuration/$SERVICE_NAME/authenticatedservices/serviceslist\",
@@ -20,5 +19,6 @@ keys = [
     \"/configuration/$SERVICE_NAME/dynamicswaggerdelayinsec\",
     \"/configuration/$SERVICE_NAME/swagger/instance\",
     \"/configuration/$SERVICE_NAME/swagger/urlPath\",
-    \"/configuration/$SERVICE_NAME/swagger/jsonPath\"
+    \"/configuration/$SERVICE_NAME/swagger/jsonPath\",
+    \"/configuration/$SERVICE_NAME/use/discoveryService\"
 ]

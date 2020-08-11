@@ -9,9 +9,18 @@ const probe = require('@map-colonies/mc-probe').Probe;
 const swaggerHandler = require('./requestHandlers/swaggerHandler').SwaggerHandler;
 const proxyHandler = require('./requestHandlers/proxyHandler').ProxyHandler;
 
-const routingDiscover = JSON.parse(config.useDns)
-  ? require('./services/dnsRoutingDiscovery').DnsRoutingDiscovery
-  : require('./services/basicRoutingDiscovery').BasicRoutingDiscovery;
+let routingDiscover;
+switch (config.discoveryService) {
+case 'dns':
+  routingDiscover = require('./services/dnsRoutingDiscovery').DnsRoutingDiscovery;
+  break;
+case 'basic':
+  routingDiscover = require('./services/basicRoutingDiscovery').BasicRoutingDiscovery;
+  break;
+case 'manual':
+default:
+  routingDiscover = require('./services/manualRoutingDiscovery').ManualRoutingDiscovery;
+}
 
 const probeConfig = {};
 const authenticatedServices = config.get('authenticatedServices');
