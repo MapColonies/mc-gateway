@@ -54,7 +54,7 @@ module.exports.DynamicSwaggerCreator = class DynamicSwaggerCreator {
 
   _retrieveServiceYaml(combinedJsonYaml, service) {
     return this._routingDiscover.getServiceURL(service).then(url => {
-      const serviceRequest = syncRequest('GET', url + '/api-docs');
+      const serviceRequest = syncRequest('GET', url + '/api-json');
       if (serviceRequest.statusCode === 200) {
         const jsonBody = JSON.parse(serviceRequest.getBody());
         const keys = Object.keys(jsonBody.paths);
@@ -76,6 +76,24 @@ module.exports.DynamicSwaggerCreator = class DynamicSwaggerCreator {
               combinedJsonYaml.definitions[key] = jsonBody.definitions[key];
             }
           });
+        }
+        const components = jsonBody.components;
+        if (components){
+          if (!combinedJsonYaml.components) {
+            combinedJsonYaml.components = {};
+          }
+          const schemas = components.schemas;
+          if (schemas){
+            if (!combinedJsonYaml.components.schemas){
+              combinedJsonYaml.components.schemas = {};
+            }
+            const schemasKeys = Object.keys(schemas);
+            schemasKeys.forEach(key => {
+              if (!combinedJsonYaml.components.schemas[key]){
+                combinedJsonYaml.components.schemas[key] = schemas[key];
+              }
+            });
+          }
         }
         this._successServices.set(service, true);
         this._logger.log('debug', `Service name: ${service} retrieve service yaml`);
