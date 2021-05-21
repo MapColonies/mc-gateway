@@ -20,7 +20,7 @@
     "@map-colonies/mc-logger": "^1.1.0",
     "@map-colonies/mc-probe": "^1.0.0",
     "config": "^3.3.1",
-    "dns-packet": "^5.2.1",
+    "dns-packet": "^5.2.2",
     "dns-socket": "^4.2.1",
     "express": "^4.12.3",
     "http-proxy": "^1.16.2",
