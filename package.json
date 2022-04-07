@@ -17,7 +17,7 @@
     "release": "standard-version"
   },
   "dependencies": {
-    "@map-colonies/mc-logger": "^1.1.0",
+    "@map-colonies/mc-logger": "^2.0.0",
     "@map-colonies/mc-probe": "^1.0.0",
     "config": "^3.3.1",
     "dns-packet": "^5.2.1",
